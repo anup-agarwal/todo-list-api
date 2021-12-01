@@ -1,7 +1,6 @@
 require("dotenv").config();
 const express = require("express");
 const app = express();
-const port = 5000;
 const { v4: uuid } = require("uuid");
 
 app.use(require("body-parser").json());
@@ -31,4 +30,6 @@ app.post("/createtodo", (req, res) => {
   res.send({ item, id });
 });
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+app.listen(process.env.PORT, () =>
+  console.log(`Example app listening on port ${process.env.PORT}!`)
+);
