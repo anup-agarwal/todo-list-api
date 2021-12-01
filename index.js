@@ -14,13 +14,19 @@ app.get("/todos", (req, res) => {
 });
 
 app.delete("/todo/:id", (req, res) => {
-  let found = false;
-  items = items.filter((item) => {
-    if (item.id !== req.params.id) found = true;
-    return item.id !== req.params.id;
-  });
-  if (found) return res.send({ msg: `${req.params.id} deleted successfully` });
-  return res.status(404).send({ msg: `${req.params.id} not found` });
+  try {
+    let found = false;
+    items = items.filter((item) => {
+      if (item.id === req.params.id) found = true;
+      return item.id !== req.params.id;
+    });
+    console.log(items);
+    if (found)
+      return res.send({ msg: `${req.params.id} deleted successfully` });
+    return res.status(404).send({ msg: `${req.params.id} not found` });
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 app.post("/createtodo", (req, res) => {
